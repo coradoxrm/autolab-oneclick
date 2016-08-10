@@ -1,0 +1,6 @@
+tango:
+  build: ./Tango
+  command: sh start.sh
+  ports:
+    - '8600:8600'
+  privileged: true
