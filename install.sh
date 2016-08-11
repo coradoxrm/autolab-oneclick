@@ -1,3 +1,7 @@
+echo "downloading source file..."
+git clone https://github.com/autolab/Tango.git
+git clone https://github.com/autolab/Autolab
+
 echo "copying config files into project files..."
 cp configs/Tango/start.sh Tango/start.sh
 cp configs/Tango/config.py Tango/config.py
