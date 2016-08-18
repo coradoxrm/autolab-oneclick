@@ -16,6 +16,7 @@ cp configs/Autolab/seed.rb Autolab/db/seed.rb
 echo "make volumes..."
 mkdir Autolab/courses
 sudo chown -R 9999:9999 Autolab/courses
+mkdir db-data
 
 echo "init docker images and containers..."
 docker-compose up -d
