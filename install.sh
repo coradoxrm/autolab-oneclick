@@ -2,10 +2,6 @@ echo "[1/5]Installing docker and docker-compose"
 sudo apt-get update && sudo apt-get install -y vim git curl
 curl -sSL https://get.docker.com/ | sh
 
-curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose -`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-
-chmod +x /usr/local/bin/docker-compose
-
 echo "[2/5] Downloading source file..."
 git clone https://github.com/autolab/Tango.git
 git clone https://github.com/autolab/Autolab
