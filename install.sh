@@ -21,6 +21,8 @@ mkdir db-data
 echo "init docker images and containers..."
 docker-compose up -d
 
+wait
+
 echo "init database..."
 docker-compose run --rm -e RAILS_ENV=production web rake db:create
 docker-compose run --rm -e RAILS_ENV=production web rake db:migrate
