@@ -33,6 +33,35 @@ logstdout() { printf "${_green}%b${_reset}\n" "$*" 2>&1 ; }
 warn() { printf "${_orange}%b${_reset}\n" "$*"; printf "%b\n" "$*" >> $LOG_FILE; }
 fail() { printf "\n${_red}ERROR: $*${_reset}\n"; printf "\nERROR: $*\n" >> $LOG_FILE; }
 
+# Traps for completion and error
+cleanup() {
+    ERR_CODE=$?
+    log "\nThank you for trying out Autolab! For questions and comments, email us at $OUR_EMAIL.\n"
+    [ -z "$PSWD_REMINDER" ] || logstdout "As a final reminder, your MySQL root password is: $PSWD_REMINDER."
+    unset MYSQL_ROOT_PSWD
+    unset PSWD_REMINDER
+    exit ${ERR_CODE:-0}
+}
+
+err_report() {
+    ERR_CODE=$?
+
+    # Ignore Ctrl-C interrupts
+    if [ $ERR_CODE == 130 ];
+    then
+        return
+    fi
+
+    # Handle normal errors
+    ERR_LINE=`sed -n "$1p" < $SCRIPT_PATH | sed -e 's/^[ \t]*//'`
+    warn "Failed command: $ERR_LINE"
+    fail "Line $1 of script has return value $ERR_CODE. The log file is saved at $LOG_FILE."
+    exit $ERR_CODE
+}
+
+trap 'cleanup' EXIT
+trap 'err_report $LINENO' ERR
+
 
 ############################################
 ## Setup Task Specifications
