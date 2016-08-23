@@ -8,7 +8,7 @@
 user = User.create!(email: "admin@foo.bar",
                     first_name: "Test",
                     last_name: "User",
-                    password: "11111111",
+                    password: "12345678",
                     confirmed_at:DateTime.now,
                     administrator: true
                     )

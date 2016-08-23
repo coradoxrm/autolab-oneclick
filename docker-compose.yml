@@ -27,3 +27,4 @@ web:
   volumes:
     - ./Autolab/courses:/home/app/webapp/courses
     - ./ssl:/etc/nginx/ssl
+  privileged: true
