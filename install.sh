@@ -70,9 +70,8 @@ trap 'err_report $LINENO' ERR
 environment_setup() {
   log "[1/5] Installing docker and docker-compose"
   sudo apt-get -y -qq update
-  sudo apt-get -y -qq upgrade
   #install relative packages
-  sudo apt-get install -y -qq vim git curl python-py
+  sudo apt-get install -y -qq vim git curl python-pip
   #install docker
   curl -sSL https://get.docker.com/ | sh
   #install docker-compose
@@ -92,13 +91,12 @@ make_volumes() {
 
   mkdir Autolab/courses
   sudo chown -R 9999:9999 Autolab/courses
-  mkdir db-data
 
   log "[3/5] Done"
 }
 
 init_docker() {
-  echo "[4/5] Init docker images and containers..."
+  log "[4/5] Init docker images and containers..."
   docker-compose up -d
   sleep 10
   log "[4/5] Done"
