@@ -9,7 +9,7 @@ db:
     - ./db-data:/var/lib/mysql
 
 tango:
-  build: ./Tango
+  image: coradoxrm/tango
   command: sh start.sh
   ports:
     - '8600:8600'
@@ -27,4 +27,3 @@ web:
   volumes:
     - ./Autolab/courses:/home/app/webapp/courses
     - ./ssl:/etc/nginx/ssl
-  privileged: true
