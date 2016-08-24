@@ -24,6 +24,7 @@ _cyan=`tput setaf 6`
 _white=`tput setaf 6`
 _reset=`tput sgr0`
 
+
 # Log file
 LOG_FILE=`mktemp`
 
@@ -32,6 +33,7 @@ log()  { printf "${_green}%b${_reset}\n" "$*"; printf "\n%b\n" "$*" >> $LOG_FILE
 logstdout() { printf "${_green}%b${_reset}\n" "$*" 2>&1 ; }
 warn() { printf "${_orange}%b${_reset}\n" "$*"; printf "%b\n" "$*" >> $LOG_FILE; }
 fail() { printf "\n${_red}ERROR: $*${_reset}\n"; printf "\nERROR: $*\n" >> $LOG_FILE; }
+
 
 # Traps for completion and error
 cleanup() {
