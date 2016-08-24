@@ -12,10 +12,6 @@ cp configs/Autolab/production.rb Autolab/config/environments/production.rb
 cp configs/Autolab/Dockerfile Autolab/Dockerfile
 cp configs/Autolab/seeds.rb Autolab/db/seeds.rb
 
-echo "make volumes..."
-mkdir Autolab/courses
-sudo chown -R 9999:9999 Autolab/courses
-
 echo "init docker images and containers..."
 docker-compose up -d
 
@@ -26,6 +22,4 @@ docker-compose run --rm -e RAILS_ENV=production web rake db:create
 docker-compose run --rm -e RAILS_ENV=production web rake db:migrate
 docker-compose run --rm -e RAILS_ENV=production web rake db:seed
 
-echo "now you can use an admin account\n Username: admin@foo.bar\n password : 11111111\n to try Autolab for trail"
-
-
+echo "now you can use an admin account\n Username: admin@foo.bar\n password : 12345678\n to try Autolab for trail"
