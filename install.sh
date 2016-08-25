@@ -71,9 +71,9 @@ trap 'err_report $LINENO' ERR
 
 environment_setup() {
   log "[1/6] Installing docker and docker-compose"
-  sudo apt-get -y -qq update
+  sudo apt-get -y update
   #install relative packages
-  sudo apt-get install -y -qq vim git curl python-pip
+  sudo apt-get install -y vim git curl python-pip
   #install docker
   curl -sSL https://get.docker.com/ | sh
   #install docker-compose
@@ -102,6 +102,8 @@ copy_config() {
   cp configs/Autolab/devise.rb Autolab/config/initializers/devise.rb
   cp configs/Autolab/nginx.conf Autolab/docker/nginx.conf
   cp configs/Autolab/production.rb Autolab/config/environments/production.rb
+
+  cp configs/Autolab/autograde.rb Autolab/app/controllers/assessment/autograde.rb
 
   log "[3/6] Done"
 }
