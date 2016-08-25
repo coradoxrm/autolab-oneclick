@@ -69,9 +69,9 @@ trap 'err_report $LINENO' ERR
 
 environment_setup() {
   log "[1/5] Installing docker and docker-compose"
-  sudo apt-get -y -qq update
+  sudo apt-get -y update
   #install relative packages
-  sudo apt-get install -y -qq vim git curl python-pip
+  sudo apt-get install -y vim git curl python-pip
   #install docker
   curl -sSL https://get.docker.com/ | sh
   #install docker-compose
