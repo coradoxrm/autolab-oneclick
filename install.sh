@@ -137,7 +137,7 @@ init_database() {
   docker-compose run --rm -e RAILS_ENV=production web rake autolab:populate
 
   cp -R ./Autolab/examples/hello/ ./Autolab/courses/AutoPopulated/
-  chown -R 9999:9999 ./Autolab/courses/hello/
+  chown -R 9999:9999 ./Autolab/courses/AutoPopulated/hello/
 
   log "[6/6] Done"
 }
