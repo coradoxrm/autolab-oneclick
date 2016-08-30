@@ -40,6 +40,9 @@ cleanup() {
     ERR_CODE=$?
     log "\nThank you for trying out Autolab! For questions and comments, email us at $OUR_EMAIL.\n"
     [ -z "$PSWD_REMINDER" ] || logstdout "As a final reminder, your MySQL root password is: $PSWD_REMINDER."
+
+    rm -rf ./Autulab ./Tango ./db-data
+
     unset MYSQL_ROOT_PSWD
     unset PSWD_REMINDER
     exit ${ERR_CODE:-0}
@@ -94,7 +97,8 @@ copy_config() {
   #should be added to Autolab master
   cp configs/Tango/start.sh Tango/start.sh
   cp configs/Autolab/Dockerfile Autolab/Dockerfile
-  cp configs/Autolab/seeds.rb Autolab/db/seeds.rb
+  #cp configs/Autolab/seeds.rb Autolab/db/seeds.rb
+  cp configs/Autolab/autolab.rake Autolab/lib/tasks/autolab.rake
 
   #User customize
   cp configs/Tango/config.py Tango/config.py
@@ -132,8 +136,8 @@ init_database() {
   docker-compose run --rm -e RAILS_ENV=production web rake db:migrate
   docker-compose run --rm -e RAILS_ENV=production web rake autolab:populate
 
-  docker-compose run --rm cp -R ./examples/hello/ ./courses/AutoPopulated/
-  docker-compose run --rm chown -R app:app hello/
+  cp -R ./Autolab/examples/hello/ ./Autolab/courses/AutoPopulated/
+  chown -R 9999:9999 hello/
 
   log "[6/6] Done"
 }
