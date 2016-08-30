@@ -33,7 +33,7 @@ Autolab3::Application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
-  # config.middleware.use Rack::SslEnforcer, :except => [ /log_submit/, /local_submit/ ]
+  config.middleware.use Rack::SslEnforcer, :except => [ /log_submit/, /local_submit/ ]
 
 
   # See everything in the log (default is :info)
@@ -81,12 +81,12 @@ Autolab3::Application.configure do
   # Use a custom smtp server, like Mandrill
   config.action_mailer.smtp_settings = {
     address:              'smtp.mandrillapp.com',
-    port:                 25,
+    port:                 ENV[MANDRILL_PORT],
     enable_starttls_auto: true,
     authentication:       'login',
-    user_name:            'MANDRILL_USERNAME',
-    password:             'MANDRILL_PASSWORD',
-    domain:               'example.com',
+    user_name:            ENV[MANDRILL_USER],
+    password:             ENV[MANDRILL_API_KEY],
+    domain:               ENV[HOSTNAME],
   }
 
   config.middleware.use ExceptionNotification::Rack,
