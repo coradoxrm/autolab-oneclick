@@ -41,7 +41,6 @@ cleanup() {
     log "\nThank you for trying out Autolab! For questions and comments, email us at $OUR_EMAIL.\n"
     [ -z "$PSWD_REMINDER" ] || logstdout "As a final reminder, your MySQL root password is: $PSWD_REMINDER."
 
-    rm -rf ./Autulab ./Tango ./db-data
 
     unset MYSQL_ROOT_PSWD
     unset PSWD_REMINDER
