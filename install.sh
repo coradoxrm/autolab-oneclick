@@ -130,7 +130,10 @@ init_database() {
 
   docker-compose run --rm -e RAILS_ENV=production web rake db:create
   docker-compose run --rm -e RAILS_ENV=production web rake db:migrate
-  docker-compose run --rm -e RAILS_ENV=production web rake db:seed
+  docker-compose run --rm -e RAILS_ENV=production web rake autolab:populate
+
+  docker-compose run --rm cp -R ./examples/hello/ ./courses/AutoPopulated/
+  docker-compose run --rm chown -R app:app hello/
 
   log "[6/6] Done"
 }
@@ -140,7 +143,7 @@ congrats() {
   - Open your browser and visit ${_orange}localhost:80${_reset} you will see the landing page\n
   - Log in with the initial account we create for you to try:\n${_orange}
   - Username: admin@foo.bar\n
-  - password: 12345678
+  - password: adminfoobar
   ${_reset}
   - Contact us if you have any questions!"
 }
