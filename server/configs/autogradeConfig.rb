@@ -18,7 +18,7 @@ AUTOCONFIG_MAX_DEAD_JOBS = 500
 AUTOCONFIG_DEF_DEAD_JOBS = 15
 
 # Key for Tango RESTful API
-RESTFUL_KEY = ENV[TANGO_API_KEY]
+RESTFUL_KEY = 'test'
 
 # Whether or not Autolab should use polling to get Tango results
 RESTFUL_USE_POLLING = false
