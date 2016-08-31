@@ -1,11 +1,7 @@
 echo "Uninstalling Autolab Project..."
 
-docker rm -f $(docker ps -a)
-docker rmi -f $(docker images -a)
+echo "Wait..."
+docker rm -f $(docker ps -a -q)
+docker rmi -f $(docker images -q)
 
-rm -rf Autolab
-rm -rf Tango
-rm -rf db-data
-rm -rf ssl
-
-echo "Done."
+echo "Now you can delete the whole directory of Autolab-project"
