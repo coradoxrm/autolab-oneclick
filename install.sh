@@ -147,7 +147,6 @@ make_volumes() {
 
   mkdir ./Autolab/courses
   sudo chown -R 9999:9999 Autolab/courses
-
   log "[4/6] Done"
 }
 
