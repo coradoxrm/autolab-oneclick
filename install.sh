@@ -74,7 +74,6 @@ cleanup() {
     log "\nThank you for trying out Autolab! For questions and comments, email us at $OUR_EMAIL.\n"
     [ -z "$PSWD_REMINDER" ] || logstdout "As a final reminder, your MySQL root password is: $PSWD_REMINDER."
 
-    rm -rf ./Autulab ./Tango ./db-data
 
     unset MYSQL_ROOT_PSWD
     unset PSWD_REMINDER
@@ -133,11 +132,11 @@ copy_config() {
   cp ./cover/autolab.rake ./Autolab/lib/tasks/autolab.rake
 
   #User customize
-  cp ./$OPTION/Tango/config.py ./Tango/config.py
-  cp ./$OPTION/Autolab/autogradeConfig.rb ./Autolab/config/autogradeConfig.rb
-  cp ./$OPTION/Autolab/devise.rb ./Autolab/config/initializers/devise.rb
-  cp ./$OPTION/Autolab/nginx.conf ./Autolab/docker/nginx.conf
-  cp ./$OPTION/Autolab/production.rb ./Autolab/config/environments/production.rb
+  cp ./$OPTION/config.py ./Tango/config.py
+  cp ./$OPTION/autogradeConfig.rb ./Autolab/config/autogradeConfig.rb
+  cp ./$OPTION/devise.rb ./Autolab/config/initializers/devise.rb
+  cp ./$OPTION/nginx.conf ./Autolab/docker/nginx.conf
+  cp ./$OPTION/production.rb ./Autolab/config/environments/production.rb
 
   log "[3/6] Done"
 }
@@ -169,8 +168,8 @@ init_database() {
   docker-compose run --rm -e RAILS_ENV=production web rake autolab:populate
 
   cd ..
-  cp -R ./Autolab/examples/hello/ ./Autolab/courses/AutoPopulated/
-  chown -R 9999:9999 ./Autolab/courses/AutoPopulated/hello/
+  cp -r ./Autolab/examples/hello ./Autolab/courses/AutoPopulated/
+  chown -R 9999:9999 ./Autolab/courses/AutoPopulated/hello
 
   log "[6/6] Done"
 }
