@@ -126,17 +126,17 @@ source_file_download() {
 copy_config() {
   log "[3/6] Copying config files..."
 
-  cp ./cover/autograde.rb ./Autolab/app/controllers/assessment/autograde.rb
-  cp ./cover/start.sh ./Tango/start.sh
-  cp ./cover/Dockerfile ./Autolab/Dockerfile
-  cp ./cover/autolab.rake ./Autolab/lib/tasks/autolab.rake
+  cp ../cover/autograde.rb ./Autolab/app/controllers/assessment/autograde.rb
+  cp ../cover/start.sh ./Tango/start.sh
+  cp ../cover/Dockerfile ./Autolab/Dockerfile
+  cp ../cover/autolab.rake ./Autolab/lib/tasks/autolab.rake
 
   #User customize
-  cp ./$OPTION/config.py ./Tango/config.py
-  cp ./$OPTION/autogradeConfig.rb ./Autolab/config/autogradeConfig.rb
-  cp ./$OPTION/devise.rb ./Autolab/config/initializers/devise.rb
-  cp ./$OPTION/nginx.conf ./Autolab/docker/nginx.conf
-  cp ./$OPTION/production.rb ./Autolab/config/environments/production.rb
+  cp ./configs/config.py ./Tango/config.py
+  cp ./configs/autogradeConfig.rb ./Autolab/config/autogradeConfig.rb
+  cp ./configs/devise.rb ./Autolab/config/initializers/devise.rb
+  cp ./configs/nginx.conf ./Autolab/docker/nginx.conf
+  cp ./configs/production.rb ./Autolab/config/environments/production.rb
 
   log "[3/6] Done"
 }
@@ -145,7 +145,7 @@ copy_config() {
 make_volumes() {
   log "[4/6] make volumes..."
 
-  mkdir Autolab/courses
+  mkdir ./Autolab/courses
   sudo chown -R 9999:9999 Autolab/courses
 
   log "[4/6] Done"
@@ -153,7 +153,7 @@ make_volumes() {
 
 init_docker() {
   log "[5/6] Init docker images and containers..."
-  cd $OPTION
+
   docker-compose up -d
   sleep 10
   log "[5/6] Done"
@@ -167,8 +167,6 @@ init_database() {
   docker-compose run --rm -e RAILS_ENV=production web rake db:migrate
   docker-compose run --rm -e RAILS_ENV=production web rake autolab:populate
 
-  cd ..
-  mkdir ./Autolab/courses/AutoPopulated/hello/
   cp -r ./Autolab/examples/hello/ ./Autolab/courses/AutoPopulated/hello/
   chown -R 9999:9999 ./Autolab/courses/AutoPopulated/hello
 
@@ -188,6 +186,7 @@ congrats() {
 #########################################################
 ## Main Entry Point
 #########################################################
+cd $OPTION
 environment_setup
 source_file_download
 copy_config
