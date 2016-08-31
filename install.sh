@@ -129,6 +129,7 @@ copy_config() {
   cp ../cover/autograde.rb ./Autolab/app/controllers/assessment/autograde.rb
   cp ../cover/start.sh ./Tango/start.sh
   cp ../cover/Dockerfile ./Autolab/Dockerfile
+  cp ../cover/Dockerfile.tango ./Tango/Dockerfile
   cp ../cover/autolab.rake ./Autolab/lib/tasks/autolab.rake
 
   #User customize
