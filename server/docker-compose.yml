@@ -18,6 +18,7 @@ tango:
 
 web:
   build: ./Autolab
+  env_file: .env
   links:
     - db
     - tango

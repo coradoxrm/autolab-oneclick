@@ -1,4 +1,38 @@
 #!/usr/bin/env bash
+usage() {
+  echo "$ ./install.sh [options]"
+  echo "options:"
+  echo "-s,       for real-world deployment on a server"
+  echo "-l,       for trail purpose on a local VM"
+  exit 1;
+}
+
+while getopts ":hsl" opt; do
+  case $opt in
+    h)
+      usage
+      ;;
+    s)
+      echo "server" >&2
+      OPTION="server"
+      ;;
+    l)
+      echo "local" >&2
+      OPTION="local"
+      ;;
+    \?)
+      echo "Invalid Option"
+      usage
+      ;;
+  esac
+done
+
+if [ $# -eq 0 ]
+  then
+    usage
+fi
+
+
 #####################################
 ## Initialization & Helper Functions
 #####################################
@@ -10,9 +44,8 @@ set -o errexit
 # Email and signup link are Base64-coded to prevent scraping
 OUR_EMAIL=`echo -n 'YXV0b2xhYi1kZXZAYW5kcmV3LmNtdS5lZHU=' | base64 -d`
 LIST_SIGNUP=`echo -n 'aHR0cDovL2VlcHVybC5jb20vYlRUT2lU' | base64 -d`
-SCRIPT_PATH="${BASH_SOURCE[0]}";
 
-AUTOLAB_PATH="${HOME}/Autolab";
+SCRIPT_PATH="${BASH_SOURCE[0]}";
 
 # Colorful output
 _red=`tput setaf 1`
@@ -93,35 +126,33 @@ source_file_download() {
 copy_config() {
   log "[3/6] Copying config files..."
 
-  #should be added to Autolab master
-  cp configs/Tango/start.sh Tango/start.sh
-  cp configs/Autolab/Dockerfile Autolab/Dockerfile
-  #cp configs/Autolab/seeds.rb Autolab/db/seeds.rb
-  cp configs/Autolab/autolab.rake Autolab/lib/tasks/autolab.rake
+  cp ../cover/autograde.rb ./Autolab/app/controllers/assessment/autograde.rb
+  cp ../cover/start.sh ./Tango/start.sh
+  cp ../cover/Dockerfile ./Autolab/Dockerfile
+  cp ../cover/autolab.rake ./Autolab/lib/tasks/autolab.rake
 
   #User customize
-  cp configs/Tango/config.py Tango/config.py
-  cp configs/Autolab/autogradeConfig.rb Autolab/config/autogradeConfig.rb
-  cp configs/Autolab/devise.rb Autolab/config/initializers/devise.rb
-  cp configs/Autolab/nginx.conf Autolab/docker/nginx.conf
-  cp configs/Autolab/production.rb Autolab/config/environments/production.rb
-
-  cp configs/Autolab/autograde.rb Autolab/app/controllers/assessment/autograde.rb
+  cp ./configs/config.py ./Tango/config.py
+  cp ./configs/autogradeConfig.rb ./Autolab/config/autogradeConfig.rb
+  cp ./configs/devise.rb ./Autolab/config/initializers/devise.rb
+  cp ./configs/nginx.conf ./Autolab/docker/nginx.conf
+  cp ./configs/production.rb ./Autolab/config/environments/production.rb
 
   log "[3/6] Done"
 }
 
+
 make_volumes() {
   log "[4/6] make volumes..."
 
-  mkdir Autolab/courses
+  mkdir ./Autolab/courses
   sudo chown -R 9999:9999 Autolab/courses
-
   log "[4/6] Done"
 }
 
 init_docker() {
   log "[5/6] Init docker images and containers..."
+
   docker-compose up -d
   sleep 10
   log "[5/6] Done"
@@ -135,8 +166,8 @@ init_database() {
   docker-compose run --rm -e RAILS_ENV=production web rake db:migrate
   docker-compose run --rm -e RAILS_ENV=production web rake autolab:populate
 
-  cp -R ./Autolab/examples/hello/ ./Autolab/courses/AutoPopulated/
-  chown -R 9999:9999 ./Autolab/courses/AutoPopulated/hello/
+  cp -r ./Autolab/examples/hello/ ./Autolab/courses/AutoPopulated/hello/
+  chown -R 9999:9999 ./Autolab/courses/AutoPopulated/hello
 
   log "[6/6] Done"
 }
@@ -154,6 +185,7 @@ congrats() {
 #########################################################
 ## Main Entry Point
 #########################################################
+cd $OPTION
 environment_setup
 source_file_download
 copy_config
