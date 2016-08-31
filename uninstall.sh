@@ -1,6 +1,10 @@
 echo "Uninstalling Autolab Project..."
 
 echo "Wait..."
+
+sudo rm -rf ./server/Autolab ./server/Tango ./server/db-data
+sudo rm -rf ./local/Autolab ./local/Autolab ./local/Tango ./local/db-data
+
 sudo rm -rf /var/lib/docker
 
 sudo apt-get purge docker-engine
