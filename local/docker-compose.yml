@@ -9,7 +9,7 @@ db:
     - ./db-data:/var/lib/mysql
 
 tango:
-  build: ./Tango
+  build: ../Tango
   command: sh start.sh
   ports:
     - '8600:8600'
@@ -17,7 +17,7 @@ tango:
 
 
 web:
-  build: ./Autolab
+  build: ../Autolab
   links:
     - db
     - tango
