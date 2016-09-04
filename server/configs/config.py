@@ -29,11 +29,11 @@ class Config:
     LOGLEVEL = logging.DEBUG
 
     # Courselabs directory. Must be created before starting Tango
-    COURSELABS = "/opt/TangoService/Tango/courselabs"
+    COURSELABS = "courselabs"
 
     # Directory within each courselab where Tango will copy the output
     # for jobs of that courselab
-    OUTPUT_FOLDER = "/opt/TangoService/Tango/output"
+    OUTPUT_FOLDER = "output"
 
     # VMMS to use. Must be set to a VMMS implemented in vmms/ before
     # starting Tango.  Options are: "localDocker", "distDocker",
