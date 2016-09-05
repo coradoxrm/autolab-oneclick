@@ -126,7 +126,6 @@ source_file_download() {
 copy_config() {
   log "[3/6] Copying config files..."
 
-  cp ../cover/autograde.rb ./Autolab/app/controllers/assessment/autograde.rb
   cp ../cover/start.sh ./Tango/start.sh
   cp ../cover/Dockerfile ./Autolab/Dockerfile
   cp ../cover/Dockerfile.tango ./Tango/Dockerfile
