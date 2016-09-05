@@ -75,7 +75,7 @@ class Config:
     DOCKER_RM_TIMEOUT = 5
     # Must be absolute path with trailing slash
     # Default value of '*'' points this path to /path/to/Tango/volumes/
-    DOCKER_VOLUME_PATH = '/opt/TangoService/Tango/volumes'
+    DOCKER_VOLUME_PATH = '/opt/TangoService/Tango/volumes/'
     DOCKER_HOST_USER = ''
 
     # Maximum size for input files in bytes
