@@ -40,7 +40,7 @@ RUN mkdir -p /home/app/webapp/courses \
     /home/app/webapp/assessmentConfig \
     /home/app/webapp/courseConfig \
     /home/app/webapp/gradebooks \
-    /home/app/webapp/tmp
+    /home/app/webapp/tmp/cache
 
 RUN chown -R app:app /home/app/webapp/courses \
     /home/app/webapp/assessmentConfig \
