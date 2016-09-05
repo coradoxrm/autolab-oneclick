@@ -133,7 +133,7 @@ copy_config() {
 
   if [ "$OPTION" == "local" ]
     then
-      cp ../cover/autograde.rb ./Autolab/app/controllers/assesment/autograde.rb
+      cp ../cover/autograde.rb ./Autolab/app/controllers/assessment/autograde.rb
   fi
 
   #User customize
