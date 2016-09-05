@@ -33,4 +33,7 @@ if [ $# -eq 0 ]
     usage
 fi
 
-echo $OPTION/like
+if [ "$OPTION" == "local" ]
+  then
+    echo "yes"
+fi

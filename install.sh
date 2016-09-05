@@ -131,6 +131,11 @@ copy_config() {
   cp ../cover/Dockerfile.tango ./Tango/Dockerfile
   cp ../cover/autolab.rake ./Autolab/lib/tasks/autolab.rake
 
+  if [ "$OPTION" == "local" ]
+    then
+      cp ../cover/autograde.rb ./Autolab/app/controllers/assesment/autograde.rb
+  fi
+
   #User customize
   cp ./configs/config.py ./Tango/config.py
   cp ./configs/autogradeConfig.rb ./Autolab/config/autogradeConfig.rb
