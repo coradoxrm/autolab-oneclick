@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+ #!/usr/bin/env bash
 usage() {
   echo "$ ./install.sh [options]"
   echo "options:"
@@ -130,6 +130,8 @@ copy_config() {
   cp ../cover/Dockerfile ./Autolab/Dockerfile
   cp ../cover/Dockerfile.tango ./Tango/Dockerfile
   cp ../cover/autolab.rake ./Autolab/lib/tasks/autolab.rake
+  cp ../cover/application.rb ./Autolab/config/application.rb
+  cp ../cover/local_env.yml ./Autolab/config/local_env.yml
 
   if [ "$OPTION" == "local" ]
     then
