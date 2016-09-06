@@ -45,7 +45,7 @@ class Config:
     #
 
     # Keys for Tango to authenticate client requests
-    KEYS = ["test"]
+    KEYS = ["oneclick"]
 
     # Queue manager checks for new work every so many seconds
     DISPATCH_PERIOD = 0.2
